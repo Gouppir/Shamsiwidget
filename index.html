@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ویجت هدر با دکمه روشن/خاموش و واترمارک</title>
+    <title>ویجت هدر ریسپانسیو با دکمه روشن/خاموش و واترمارک</title>
     <style>
         body {
             margin: 0;
@@ -21,7 +21,7 @@
 
         .header-widget {
             text-align: center;
-            width: 100%;
+            width: 90%; /* عرض پویا برای تطابق با دستگاه‌های مختلف */
             max-width: 800px;
             padding: 20px;
             background-color: #ffffff;
@@ -33,13 +33,15 @@
 
         .header-widget h1 {
             margin: 0;
-            font-size: 24px;
+            font-size: 6vw; /* اندازه پویا برای تیتر */
+            max-font-size: 24px;
             color: #ff6600;
         }
 
         .header-widget p {
             margin: 10px 0;
-            font-size: 18px;
+            font-size: 4vw; /* اندازه پویا برای پاراگراف */
+            max-font-size: 18px;
             color: #555;
         }
 
@@ -47,54 +49,49 @@
             margin-top: 20px;
             position: relative;
             width: 60px;
-            height: 30px;
+            height: 34px; /* ارتفاع دکمه */
+            background-color: #ccc; /* رنگ پس‌زمینه دکمه */
+            border-radius: 30px; /* گوشه‌های گرد */
+            display: flex;
+            align-items: center;
+            justify-content: center; /* مرکزیت دکمه */
+            padding: 2px;
+            box-sizing: border-box;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin: 0 auto; /* مرکزیت دکمه در کل ویجت */
         }
 
         .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
+            display: none; /* پنهان کردن چک‌باکس */
         }
 
         .slider {
             position: absolute;
             cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 30px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
+            top: 2px;
             left: 2px;
-            bottom: 2px;
-            background-color: white;
-            transition: .4s;
+            background-color: #fff;
             border-radius: 50%;
+            transition: .4s;
+            width: 30px;
+            height: 30px;
         }
 
         input:checked + .slider {
+            left: calc(100% - 32px); /* حرکت دکمه به سمت راست */
             background-color: #ff6600;
-        }
-
-        input:checked + .slider:before {
-            transform: translateX(30px);
         }
 
         .watermark {
             margin-top: 15px;
-            font-size: 12px;
+            font-size: 3vw; /* اندازه پویا برای واترمارک */
+            max-font-size: 12px;
             color: #555; /* رنگ پیش‌فرض در لایت مود */
             transition: color 0.3s ease;
         }
 
+        /* تم دارک مود */
         .dark-mode {
             background-color: #333333;
             color: #ffffff;
@@ -105,8 +102,33 @@
             color: #ffffff;
         }
 
+        .dark-mode .header-widget h1, .dark-mode .header-widget p {
+            color: #ffffff;
+        }
+
+        .dark-mode .toggle-switch {
+            background-color: #666;
+        }
+
         .dark-mode .watermark {
             color: #ff6600; /* رنگ نارنجی در دارک مود */
+        }
+
+        /* ریسپانسیو برای دستگاه‌های کوچکتر */
+        @media (max-width: 480px) {
+            .toggle-switch {
+                width: 50px;
+                height: 28px;
+            }
+
+            .slider {
+                width: 24px;
+                height: 24px;
+            }
+
+            input:checked + .slider {
+                left: calc(100% - 26px); /* تنظیم حرکت دکمه برای اندازه‌های کوچکتر */
+            }
         }
     </style>
 </head>
