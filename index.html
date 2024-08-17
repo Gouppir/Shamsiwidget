@@ -9,33 +9,35 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            height: auto;
             margin: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #f4f4f4;
+            background-color: transparent; /* حذف رنگ پس‌زمینه */
             color: #555;
             direction: rtl;
+            padding: 0;
         }
 
         .date-widget {
             background-color: #ffffff;
             border: 2px solid #ff6600; /* رنگ نارنجی */
             border-radius: 10px;
-            padding: 20px;
+            padding: 10px 20px; /* کم کردن padding */
             text-align: center;
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            width: 300px;
+            width: auto; /* تنظیم اندازه ویجت به اندازه محتوا */
+            height: auto;
         }
 
         .date-widget h1 {
             margin: 0;
-            font-size: 24px;
+            font-size: 18px; /* کاهش سایز فونت */
             color: #ff6600; /* رنگ نارنجی */
         }
 
         .date-widget p {
             margin: 5px 0 0 0;
-            font-size: 18px;
+            font-size: 16px; /* کاهش سایز فونت */
             color: #333; /* رنگ طوسی تیره */
         }
     </style>
@@ -48,7 +50,7 @@
 </div>
 
 <!-- بارگذاری کتابخانه Jalaali -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jalaali-js/1.1.0/jalaali.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jalaali-js/dist/jalaali.min.js"></script>
 
 <script>
     // گرفتن تاریخ میلادی
