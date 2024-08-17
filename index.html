@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ویجت هدر</title>
+    <title>ویجت هدر با دکمه روشن/خاموش و واترمارک</title>
     <style>
         body {
             margin: 0;
@@ -43,11 +43,56 @@
             color: #555;
         }
 
-        .theme-toggle {
+        .toggle-switch {
             margin-top: 20px;
+            position: relative;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
             cursor: pointer;
-            font-size: 24px;
-            color: #ffcc00; /* رنگ زرد آیکون */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 30px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 2px;
+            bottom: 2px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #ff6600;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+
+        .watermark {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #555; /* رنگ پیش‌فرض در لایت مود */
+            transition: color 0.3s ease;
         }
 
         .dark-mode {
@@ -60,8 +105,8 @@
             color: #ffffff;
         }
 
-        .dark-mode .theme-toggle {
-            color: #ffcc00;
+        .dark-mode .watermark {
+            color: #ff6600; /* رنگ نارنجی در دارک مود */
         }
     </style>
 </head>
@@ -70,9 +115,11 @@
 <div class="header-widget">
     <h1 id="today-date">تاریخ امروز</h1>
     <p id="motivational-quote">"موفقیت نتیجه تلاش‌های کوچک روزانه است."</p>
-    <div class="theme-toggle" id="theme-toggle">
-        ☀️
-    </div>
+    <label class="toggle-switch">
+        <input type="checkbox" id="theme-toggle">
+        <span class="slider"></span>
+    </label>
+    <p class="watermark">goupp.ir</p>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/jalaali-js/dist/jalaali.min.js"></script>
@@ -93,10 +140,10 @@
         document.getElementById('today-date').textContent = shamsiDate;
     });
 
-    // تابع تغییر تم با کلیک بر روی آیکون خورشید
+    // تابع تغییر تم با کلیک بر روی دکمه روشن/خاموش
     const themeToggle = document.getElementById('theme-toggle');
-    themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
+    themeToggle.addEventListener('change', () => {
+        document.body.classList.toggle('dark-mode', themeToggle.checked);
     });
 </script>
 
