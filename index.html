@@ -47,10 +47,14 @@
     <p id="shamsi-date">روز ماه</p>
 </div>
 
+<!-- بارگذاری کتابخانه Jalaali -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jalaali-js/1.1.0/jalaali.min.js"></script>
+
 <script>
     // گرفتن تاریخ میلادی
     const today = new Date();
+    
+    // تبدیل تاریخ میلادی به شمسی با استفاده از jalaali.js
     const jalaaliDate = jalaali.toJalaali(today);
 
     // آرایه‌های نام روزهای هفته و ماه‌های شمسی
