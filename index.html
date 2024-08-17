@@ -53,26 +53,28 @@
 <script src="https://cdn.jsdelivr.net/npm/jalaali-js/dist/jalaali.min.js"></script>
 
 <script>
-    // گرفتن تاریخ میلادی
-    const today = new Date();
-    
-    // تبدیل تاریخ میلادی به شمسی با استفاده از jalaali.js
-    const jalaaliDate = jalaali.toJalaali(today);
+    document.addEventListener('DOMContentLoaded', (event) => {
+        // گرفتن تاریخ میلادی
+        const today = new Date();
+        
+        // تبدیل تاریخ میلادی به شمسی با استفاده از jalaali.js
+        const jalaaliDate = jalaali.toJalaali(today);
 
-    // آرایه‌های نام روزهای هفته و ماه‌های شمسی
-    const weekdays = ["یک‌شنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه", "پنج‌شنبه", "جمعه", "شنبه"];
-    const months = [
-        "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور",
-        "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"
-    ];
+        // آرایه‌های نام روزهای هفته و ماه‌های شمسی
+        const weekdays = ["یک‌شنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه", "پنج‌شنبه", "جمعه", "شنبه"];
+        const months = [
+            "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور",
+            "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"
+        ];
 
-    // استخراج نام روز هفته و تاریخ شمسی
-    const weekday = weekdays[today.getDay()];
-    const shamsiDate = `${jalaaliDate.jd} ${months[jalaaliDate.jm - 1]} ${jalaaliDate.jy}`;
+        // استخراج نام روز هفته و تاریخ شمسی
+        const weekday = weekdays[today.getDay()];
+        const shamsiDate = `${jalaaliDate.jd} ${months[jalaaliDate.jm - 1]} ${jalaaliDate.jy}`;
 
-    // نمایش تاریخ و روز هفته
-    document.getElementById('weekday').textContent = weekday;
-    document.getElementById('shamsi-date').textContent = shamsiDate;
+        // نمایش تاریخ و روز هفته
+        document.getElementById('weekday').textContent = weekday;
+        document.getElementById('shamsi-date').textContent = shamsiDate;
+    });
 </script>
 
 </body>
