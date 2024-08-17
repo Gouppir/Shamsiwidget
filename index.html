@@ -3,83 +3,118 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ویجت تاریخ شمسی فشرده</title>
+    <title>ویجت هدر با تغییر تم</title>
     <style>
         body {
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: auto;
-            margin: 0;
+            height: 100vh;
             font-family: 'Arial', sans-serif;
-            background-color: transparent;
-            color: #555;
+            color: #333;
+            background-color: #f4f4f4;
             direction: rtl;
-            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        .resizable {
-            resize: both;
-            overflow: hidden; /* جلوگیری از نمایش اسکرول بار */
-            border: 2px solid #ff6600;
-            padding: 5px;
-            border-radius: 5px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            width: 200px; /* عرض پیش‌فرض کوچکتر */
-            height: 80px; /* ارتفاع پیش‌فرض کوچکتر */
-        }
-
-        .date-widget {
-            background-color: #ffffff;
-            border-radius: 5px;
-            padding: 5px;
+        .header-widget {
             text-align: center;
             width: 100%;
-            height: 100%;
+            max-width: 800px;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             box-sizing: border-box;
         }
 
-        .date-widget h1 {
+        .header-widget h1 {
             margin: 0;
-            font-size: 14px; /* کاهش سایز فونت */
+            font-size: 24px;
             color: #ff6600;
         }
 
-        .date-widget p {
-            margin: 2px 0 0 0;
-            font-size: 12px; /* کاهش سایز فونت */
-            color: #333;
+        .header-widget p {
+            margin: 10px 0;
+            font-size: 18px;
+            color: #555;
+        }
+
+        .header-widget .theme-buttons {
+            margin-top: 20px;
+        }
+
+        .header-widget button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .header-widget button.default {
+            background-color: #ff6600;
+            color: white;
+        }
+
+        .header-widget button.dark {
+            background-color: #333;
+            color: white;
+        }
+
+        .header-widget button.blue-white {
+            background-color: #007bff;
+            color: white;
         }
     </style>
 </head>
 <body>
 
-<div class="resizable">
-    <div class="date-widget">
-        <h1 id="weekday">چند شنبه</h1>
-        <p id="shamsi-date">روز ماه</p>
+<div class="header-widget">
+    <h1 id="today-date">تاریخ امروز</h1>
+    <p id="motivational-quote">"موفقیت نتیجه تلاش‌های کوچک روزانه است."</p>
+    <div class="theme-buttons">
+        <button class="default" onclick="setTheme('default')">رنگ پیش فرض</button>
+        <button class="dark" onclick="setTheme('dark')">دارک مود</button>
+        <button class="blue-white" onclick="setTheme('blue-white')">آبی سفید</button>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/jalaali-js/dist/jalaali.min.js"></script>
 
 <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
+    // نمایش تاریخ امروز
+    document.addEventListener('DOMContentLoaded', () => {
         const today = new Date();
         const jalaaliDate = jalaali.toJalaali(today);
 
-        const weekdays = ["یک‌شنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه", "پنج‌شنبه", "جمعه", "شنبه"];
         const months = [
             "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور",
             "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"
         ];
 
-        const weekday = weekdays[today.getDay()];
         const shamsiDate = `${jalaaliDate.jd} ${months[jalaaliDate.jm - 1]} ${jalaaliDate.jy}`;
 
-        document.getElementById('weekday').textContent = weekday;
-        document.getElementById('shamsi-date').textContent = shamsiDate;
+        document.getElementById('today-date').textContent = shamsiDate;
     });
+
+    // تابع تغییر تم
+    function setTheme(theme) {
+        if (theme === 'dark') {
+            document.body.style.backgroundColor = '#333';
+            document.body.style.color = '#ffffff';
+        } else if (theme === 'blue-white') {
+            document.body.style.backgroundColor = '#007bff';
+            document.body.style.color = '#ffffff';
+        } else {
+            document.body.style.backgroundColor = '#f4f4f4';
+            document.body.style.color = '#333';
+        }
+    }
 </script>
 
 </body>
