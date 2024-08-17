@@ -3,30 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ویجت تاریخ شمسی</title>
+    <title>ویجت تاریخ شمسی قابل تغییر اندازه</title>
     <style>
         body {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: auto;
+            height: 100vh;
             margin: 0;
             font-family: 'Arial', sans-serif;
-            background-color: transparent; /* حذف رنگ پس‌زمینه */
+            background-color: transparent;
             color: #555;
             direction: rtl;
             padding: 0;
         }
 
+        .resizable {
+            resize: both;
+            overflow: auto;
+            border: 2px solid #ff6600; /* رنگ نارنجی */
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            height: 150px;
+        }
+
         .date-widget {
             background-color: #ffffff;
-            border: 2px solid #ff6600; /* رنگ نارنجی */
             border-radius: 10px;
-            padding: 10px 20px; /* کم کردن padding */
+            padding: 10px 20px;
             text-align: center;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            width: auto; /* تنظیم اندازه ویجت به اندازه محتوا */
-            height: auto;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box; /* اطمینان از درست بودن سایز در تغییر اندازه */
         }
 
         .date-widget h1 {
@@ -44,34 +54,29 @@
 </head>
 <body>
 
-<div class="date-widget">
-    <h1 id="weekday">چند شنبه</h1>
-    <p id="shamsi-date">روز ماه</p>
+<div class="resizable">
+    <div class="date-widget">
+        <h1 id="weekday">چند شنبه</h1>
+        <p id="shamsi-date">روز ماه</p>
+    </div>
 </div>
 
-<!-- بارگذاری کتابخانه Jalaali -->
 <script src="https://cdn.jsdelivr.net/npm/jalaali-js/dist/jalaali.min.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', (event) => {
-        // گرفتن تاریخ میلادی
         const today = new Date();
-        
-        // تبدیل تاریخ میلادی به شمسی با استفاده از jalaali.js
         const jalaaliDate = jalaali.toJalaali(today);
 
-        // آرایه‌های نام روزهای هفته و ماه‌های شمسی
         const weekdays = ["یک‌شنبه", "دوشنبه", "سه‌شنبه", "چهارشنبه", "پنج‌شنبه", "جمعه", "شنبه"];
         const months = [
             "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور",
             "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"
         ];
 
-        // استخراج نام روز هفته و تاریخ شمسی
         const weekday = weekdays[today.getDay()];
         const shamsiDate = `${jalaaliDate.jd} ${months[jalaaliDate.jm - 1]} ${jalaaliDate.jy}`;
 
-        // نمایش تاریخ و روز هفته
         document.getElementById('weekday').textContent = weekday;
         document.getElementById('shamsi-date').textContent = shamsiDate;
     });
